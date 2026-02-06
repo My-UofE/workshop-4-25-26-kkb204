@@ -119,5 +119,11 @@ public class Rectangle {
   public boolean isSquare() {
     return width == height;
   }
+
+  // Return a description of a rectangle in the form of
+  // Rectangle[x=*,y=*,w=*,h=*]
+  public String toString(){
+    return "Rectangle[x="+originX+",y="+originY+",w="+width+",h="+height+"]";
+  }
 }
 

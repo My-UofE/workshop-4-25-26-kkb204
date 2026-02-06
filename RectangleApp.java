@@ -98,5 +98,7 @@ public class RectangleApp {
 		r2.scale(0.5);
 		System.out.println("r2 width: " + r2.getWidth());
 		System.out.println("r3 width: " + r3.getWidth());
+
+		
 		}
 }
