@@ -1,13 +1,13 @@
 // A Rectangle class
 public class Rectangle {
-  
-  // 4 instance attributes
-  public double width;
-  public double height;
-  public double originX = 0.0;
-  public double originY = 0.0;
 
-  // 1 static attributes
+  // instance attributes (encapsulated)
+  private double width;
+  private double height;
+  private double originX;
+  private double originY;
+
+  // static attribute
   public static final int NUMBER_OF_SIDES = 4;
 
   // main constructor
@@ -18,54 +18,86 @@ public class Rectangle {
     this.originY = originY;
   }
 
-  // second constructor: 
+  // constructor with default origin
   public Rectangle(double width, double height) {
-      this(width, height, 0, 0);
-  }
-  // second constructor: 
-  public Rectangle() {
-      this(1,1,0,0);
-  }
-  // method: move the rectangle
-  public void move(double dx, double dy) {
-	   originX += dx;
-	   originY += dy;
+    this(width, height, 0, 0);
   }
 
-  // method: compute the area of the rectangle
+  // default constructor
+  public Rectangle() {
+    this(1, 1, 0, 0);
+  }
+
+  // getters
+  public double getWidth() {
+    return width;
+  }
+
+  public double getHeight() {
+    return height;
+  }
+
+  public double getOriginX() {
+    return originX;
+  }
+
+  public double getOriginY() {
+    return originY;
+  }
+
+  // setters
+  public void setWidth(double width) {
+    if (width >= 0) {
+      this.width = width;
+    }
+  }
+
+  public void setHeight(double height) {
+    if (height >= 0) {
+      this.height = height;
+    }
+  }
+
+  // move the rectangle
+  public void move(double dx, double dy) {
+    originX += dx;
+    originY += dy;
+  }
+
+  // compute area
   public double getArea() {
     return width * height;
   }
-  
-  // method: compute the area of the rectangle
+
+  // compute perimeter
   public double getPerimeter() {
     return 2 * (width + height);
   }
-  
-  // method: scale the rectangle
+
+  // scale the rectangle
   public void scale(double scaleX, double scaleY) {
-    width = scaleX * width;
-    height = scaleY * height;
+    width *= scaleX;
+    height *= scaleY;
   }
 
-   // method: scale the rectangle
+  // uniform scale
   public void scale(double scaleFactor) {
-    width = scaleFactor * width;
-    height = scaleFactor * height;
+    scale(scaleFactor, scaleFactor);
   }
 
-  public boolean isOverlappedWith(Rectangle r){
-    double leftA = this.originX;
-    double rightA = this.originX + this.width;
-    double topA = this.originY;
-    double bottomA = this.originY + this.height;
+  // overlap check (instance)
+  public boolean isOverlappedWith(Rectangle r) {
+    double leftA   = originX;
+    double rightA  = originX + width;
+    double topA    = originY;
+    double bottomA = originY + height;
 
-    double leftB = r.originX;
-    double rightB = r.originX + r.width;
-    double topB = r.originY;
+    double leftB   = r.originX;
+    double rightB  = r.originX + r.width;
+    double topB    = r.originY;
     double bottomB = r.originY + r.height;
 
-    if (rightA <= leftB) return false;  
+    if (rightA <= leftB) return false;
     if (leftA >= rightB) return false;
     if (bottomA <= topB) return false;
     if (topA >= bottomB) return false;
@@ -73,16 +105,19 @@ public class Rectangle {
     return true;
   }
 
+  // overlap check (static)
   public static boolean areOverlapping(Rectangle r1, Rectangle r2) {
     return r1.isOverlappedWith(r2);
   }
 
-  public void calcRatio() {
-    ratio = width/height
+  // aspect ratio (FIXED: no stored state)
+  public double getRatio() {
+    return width / height;
   }
 
+  // check if square
   public boolean isSquare() {
-    if (width == height) return true;
-    return false;
+    return width == height;
   }
 }
+
