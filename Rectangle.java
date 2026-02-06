@@ -42,4 +42,47 @@ public class Rectangle {
     return 2 * (width + height);
   }
   
+  // method: scale the rectangle
+  public void scale(double scaleX, double scaleY) {
+    width = scaleX * width;
+    height = scaleY * height;
+  }
+
+   // method: scale the rectangle
+  public void scale(double scaleFactor) {
+    width = scaleFactor * width;
+    height = scaleFactor * height;
+  }
+
+  public boolean isOverlappedWith(Rectangle r){
+    double leftA = this.originX;
+    double rightA = this.originX + this.width;
+    double topA = this.originY;
+    double bottomA = this.originY + this.height;
+
+    double leftB = r.originX;
+    double rightB = r.originX + r.width;
+    double topB = r.originY;
+    double bottomB = r.originY + r.height;
+
+    if (rightA <= leftB) return false;  
+    if (leftA >= rightB) return false;
+    if (bottomA <= topB) return false;
+    if (topA >= bottomB) return false;
+
+    return true;
+  }
+
+  public static boolean areOverlapping(Rectangle r1, Rectangle r2) {
+    return r1.isOverlappedWith(r2);
+  }
+
+  public void calcRatio() {
+    ratio = width/height
+  }
+
+  public boolean isSquare() {
+    if (width == height) return true;
+    return false;
+  }
 }
